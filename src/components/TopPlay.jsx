@@ -12,11 +12,30 @@ import { playPause, setActiveSong } from "../redux/features/playerSlice";
 import { useGetTopChartsQuery } from "../redux/services/shazamCore";
 
 const TopPlay = () => {
+    const dispatch = useDispatch();
+    const { activeSong, isPlaying } = useSelector(state => state.player);
+    const { data } = useGetTopChartsQuery();
+    const divRef = useRef(null)
 
+    /**
+     * stop page from scrolling to the bottom.
+     */
+    useEffect(() =>{
+        divRef.current.scrollIntoView({behavior: 'smooth'});
+    })
+
+    const handlePauseClick = () =>{
+        dispatch(playPause(false))
+    }
+
+    const handlePlayPause = () =>{
+        dispatch(setActiveSong({ song, data, i }))
+        dispatch(playPause(true))
+    }
     return (
-        <>
-            top charts
-        </>
+        <div ref={divRef}>
+
+        </div>
     )
 }
 
