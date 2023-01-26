@@ -1,6 +1,11 @@
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+const WORLD_CHARTS = '/v1/charts/world'
+const TRACKS_DETAILS = '/v1/tracks/details'
+const TRACKS_RELATED = '/v1/tracks/related'
+const ARTISTS_DETAILS = '/v2/artists/details'
+
 export const shazamCoreApi = createApi({
   reducerPath: 'shazamCoreApi',
   baseQuery: fetchBaseQuery({
@@ -13,10 +18,11 @@ export const shazamCoreApi = createApi({
     },
   }),
   endpoints: (builder) => ({
-    getTopCharts: builder.query({ query: () => '/v1/charts/world' }),
-    getSongDetails: builder.query({ query: ({ songid }) => `/v1/tracks/details?track_id=${songid}`}),
-    getRelatedSongs: builder.query({ query: ({ songid }) => `/v1/tracks/related?track_id=${songid}`}),
-    getArtistDetails: builder.query({query: (artistId) => `/v2/artists/details?artist_id=${artistId}`})
+    getTopCharts: builder.query({ query: () => WORLD_CHARTS }),
+    getSongDetails: builder.query({ query: ({ songid }) => `${TRACKS_DETAILS}?track_id=${songid}`}),
+    getRelatedSongs: builder.query({ query: ({ songid }) => `${TRACKS_RELATED}?track_id=${songid}`}),
+    getArtistDetails: builder.query({query: (artistId) => `${ARTISTS_DETAILS}?artist_id=${artistId}`}),
+
   }),
 });
 
