@@ -16,7 +16,7 @@ import  'swiper/css';
 import 'swiper/css/free-mode';
 
 const TopChartCard = ({ song, i, isPlaying, activeSong, handlePauseClick, handlePlayClick }) => {
-    console.log('TopChartCard: ', song)
+
     return (
     <div className="w-full flex flex-row items-center hover:bg-[#4c426e] py-6 p-4 rounded-lg cursor-pointer mg-2">
         <h3 className="font-bold text-base text-white mr-3">{ i + 1 }</h3>
