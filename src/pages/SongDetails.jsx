@@ -7,8 +7,17 @@ import {useGetSongDetailsQuery, useGetRelatedSongsQuery} from "../redux/services
 
 const SongDetails = () => {
     const dispatch = useDispatch();
-    const { songid } = useParams();
+    const { songid, id: artistId } = useParams();
     const { activeSong, isPlaying } = useSelector((state) => state.player)
+
+    const handlePauseClick = () => {
+        dispatch(playPause(false));
+    };
+
+    const handlePlayClick = (song, i) => {
+        dispatch(setActiveSong({ song, data, i }));
+        dispatch(playPause(true));
+    };
 
     // fetch song details with query builder form shazam core
     const { data: songData, isFetching: isFetchingSongDetails } = useGetSongDetailsQuery({ songid });
@@ -32,6 +41,17 @@ const SongDetails = () => {
                     }
                 </div>
             </div>
+
+        {/*    Related Songs component */}
+            <RelatedSongs
+                data={data}
+                isPlaying={isPlaying}
+                artistId={artistId}
+                activeSong={activeSong}
+                handlePause={handlePauseClick}
+                handlePlay={handlePlayClick}
+            />
+
         </div>
     )
 }
