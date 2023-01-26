@@ -8,8 +8,8 @@ const SongBar = ({ song, i, artistId, isPlaying, activeSong, handlePauseClick, h
     <h3 className="font-bold text-base text-white mr-3">{i + 1}.</h3>
     <div className="flex-1 flex flex-row justify-between items-center">
       <img
-        className="w-20 h-20 rounded-lg"
-        src={artistId ? song?.attributes?.artwork?.url.replace('{w}', '125').replace('{h}', '125') : song?.images?.coverart}
+        className="w-20 h-20 rounded-lg object-contain"
+        src={artistId ? song?.attributes?.artwork?.url.replace('{w}', '125').replace('{h}', '125') : (song?.images?.coverart || song?.hub?.image) }
         alt={song?.title}
       />
       <div className="flex-1 flex flex-col justify-center mx-3">
