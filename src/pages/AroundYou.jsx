@@ -3,10 +3,8 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 import { Error,Loader, SongCard } from '../components';
-import {logo} from "../assets";
 
 import { useGetSongsByCountryQuery } from "../redux/services/shazamCore";
-import {HiBars2} from "react-icons/all";
 
 /**
  * Realtime ip location api will be used to identify the top tracks thats happening in that country.
