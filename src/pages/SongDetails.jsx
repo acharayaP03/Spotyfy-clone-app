@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { DetailsHeader, Error, Loader, RelatedSongs } from '../components';
 
 import { setActiveSong, playPause } from "../redux/features/playerSlice";
-import {useGetSongDetailsQuery} from "../redux/services/shazamCore";
+import {useGetSongDetailsQuery, useGetRelatedSongsQuery} from "../redux/services/shazamCore";
 
 const SongDetails = () => {
     const dispatch = useDispatch();
@@ -11,8 +11,13 @@ const SongDetails = () => {
     const { activeSong, isPlaying } = useSelector((state) => state.player)
 
     // fetch song details with query builder form shazam core
-    const { data: songData, isFetching: isFetchingSongDetails } = useGetSongDetailsQuery({ songid })
-    console.log('Song data: ', songData)
+    const { data: songData, isFetching: isFetchingSongDetails } = useGetSongDetailsQuery({ songid });
+    // fetch related songs when user clicks on any artists.
+    const { data, isFetching: isFetchingRelatedSongs, error } = useGetRelatedSongsQuery({ songid })
+
+    if(isFetchingSongDetails || isFetchingRelatedSongs ) return <Loader title="Searching song details"/>
+
+    if (error ) return <Error />
     return(
         <div className="flex flex-col">
             <DetailsHeader artistId="" songData={songData}/>
