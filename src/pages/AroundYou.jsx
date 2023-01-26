@@ -6,6 +6,7 @@ import { Error,Loader, SongCard } from '../components';
 import {logo} from "../assets";
 
 import { useGetSongsByCountryQuery } from "../redux/services/shazamCore";
+import {HiBars2} from "react-icons/all";
 
 /**
  * Realtime ip location api will be used to identify the top tracks thats happening in that country.
@@ -19,12 +20,6 @@ const CountryTracks = () => {
     const [loading, setLoading ] = useState(true);
     const { activeSong, isPlaying } = useSelector((state) => state.player)
 
-    const { data, isFetching, error } = useGetSongsByCountryQuery(country)
-
-
-    if(isFetching && loading ) return <Loader title="Loading songs around you...."/>
-
-    if(error && country) return <Error />
 
     /**
      * Get location from here
@@ -34,14 +29,41 @@ const CountryTracks = () => {
 
         axios.get(`${import.meta.env.VITE_GEO_API_URL}`,{
             params: { apiKey: import.meta.env.VITE_GEO_API_KEY}
-        }).then( result => console.log(result?.data?.location?.country))
+        }).then( result => setCountry(result?.data?.location?.country))
             .catch((error) => console.log(error))
             .finally(() => setLoading(false))
 
     }, [country])
+
+    const { data, isFetching, error } = useGetSongsByCountryQuery(country)
+
+    if(isFetching && loading ) return <Loader title="Loading songs around you...."/>
+
+    if(error && country) return <Error />
+
+
     return (
-        <div className="text-white">
-            Around You..
+        <div className="flex flex-col">
+           <h2 className="font-bold text-3xl text-white text-left mt-4 mb-10">Around you</h2>
+
+            <div className="flex flex-wrap sm:justify-start justify-center gap-8">
+                {
+                    data ?
+                        data?.map((song, i) =>
+                            (
+                                <SongCard
+                                    key={song.key}
+                                    song={song}
+                                    isPlaying={isPlaying}
+                                    activeSong={activeSong}
+                                    data={data}
+                                    i={i}
+                                />
+                            )
+                        ) :
+                        <h2>Sorry couldn't fetch songs ...</h2>
+                }
+            </div>
         </div>
     )
 };

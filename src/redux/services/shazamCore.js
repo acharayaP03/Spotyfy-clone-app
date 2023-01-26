@@ -12,7 +12,7 @@ export const shazamCoreApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_SHAZAM_CORE_RAPID_API_URL,
     prepareHeaders: (headers) => {
-      // headers.set('X-RapidAPI-Key', `${import.meta.env.VITE_SHAZAM_CORE_RAPID_API_KEY}`);
+      headers.set('X-RapidAPI-Key', `${import.meta.env.VITE_SHAZAM_CORE_RAPID_API_KEY}`);
       // headers.set('X-RapidAPI-Key', '');
 
       return headers;
