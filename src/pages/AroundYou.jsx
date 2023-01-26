@@ -46,20 +46,18 @@ const CountryTracks = () => {
 
             <div className="flex flex-wrap sm:justify-start justify-center gap-8">
                 {
-                    data ?
-                        data?.map((song, i) =>
-                            (
-                                <SongCard
-                                    key={song.key}
-                                    song={song}
-                                    isPlaying={isPlaying}
-                                    activeSong={activeSong}
-                                    data={data}
-                                    i={i}
-                                />
-                            )
-                        ) :
-                        <h2>Sorry couldn't fetch songs ...</h2>
+                    data?.map((song, i) =>
+                        (
+                            <SongCard
+                                key={song.key}
+                                song={song}
+                                isPlaying={isPlaying}
+                                activeSong={activeSong}
+                                data={data}
+                                i={i}
+                            />
+                        )
+                    )
                 }
             </div>
         </div>
