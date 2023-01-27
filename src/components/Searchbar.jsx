@@ -10,7 +10,7 @@ const Searchbar = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        navigate(`/search/${searchTerm}`);
+       navigate(`/search/${searchTerm}`);
     }
     return (
         <form autoComplete="off" className="p-2 text-gray-400 focus-within:text-gray-600" onSubmit={handleSubmit}>
@@ -26,7 +26,7 @@ const Searchbar = () => {
                     placeholder="Search"
                     type="search"
                     value={searchTerm}
-                    onChange={() => setSearchTerm(e.target.value)}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                     className="flex-1 bg-transparent border-none outline-none placeholder-gray-500 text-base text-white p-4"
                 />
             </div>
