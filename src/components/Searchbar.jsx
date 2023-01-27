@@ -10,7 +10,7 @@ const Searchbar = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-       navigate(`/search/${searchTerm}`);
+        navigate(`/search/${searchTerm}`);
     }
     return (
         <form autoComplete="off" className="p-2 text-gray-400 focus-within:text-gray-600" onSubmit={handleSubmit}>
